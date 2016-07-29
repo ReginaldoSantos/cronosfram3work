@@ -1,0 +1,6 @@
+br\com\techne\cronos\cli\commands\samples\MavenTestCommand.class
+br\com\techne\cronos\cli\commands\samples\MavenCleanCommand.class
+br\com\techne\cronos\cli\commands\samples\MavenLikeMainCommand.class
+br\com\techne\cronos\cli\commands\samples\GitLikeMainCommand.class
+br\com\techne\cronos\cli\commands\samples\GitAddCommand.class
+br\com\techne\cronos\cli\commands\samples\GitLogCommand.class

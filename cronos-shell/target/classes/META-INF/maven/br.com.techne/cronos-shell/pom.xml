@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>br.com.techne</groupId>
+  <artifactId>cronos-shell</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>cronos-shell</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jdk.version>1.8</jdk.version>
+    <spring.shell.version>1.2.0.RC1</spring.shell.version>
+    <jar.mainclass>org.springframework.shell.Bootstrap</jar.mainclass>
+    <junit.version>4.11</junit.version>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>br.com.techne</groupId>
+      <artifactId>cronos-examples</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>br.com.techne</groupId>
+      <artifactId>cronos-merge-executer</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.shell</groupId>
+      <artifactId>spring-shell</artifactId>
+      <version>${spring.shell.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit-dep</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <profiles>
+    <profile>
+
+      <!--
+        Default Profile
+
+        Gera um Jar com todas as dependências
+       -->
+
+      <id>FatJar</id>
+
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
+      <build>
+        <finalName>${project.artifactId}</finalName>
+
+        <plugins>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <source>${jdk.version}</source>
+              <target>${jdk.version}</target>
+              <encoding>${project.build.sourceEncoding}</encoding>
+            </configuration>
+          </plugin>
+
+          <!-- Creating FAT jar file -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <archive>
+                <manifest>
+                  <mainClass>${jar.mainclass}</mainClass>
+                </manifest>
+              </archive>
+            </configuration>
+            <executions>
+              <execution>
+                <id>make-assembly</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+        </plugins>
+
+      </build>
+
+    </profile>
+  </profiles>
+
+  <repositories>
+    <repository>
+      <id>libs-milestone</id>
+      <url>http://repo.spring.io/libs-milestone/</url>
+    </repository>
+    <repository>
+      <id>libs-release</id>
+      <url>http://repo.spring.io/libs-release/</url>
+    </repository>
+  </repositories>
+
+</project>
